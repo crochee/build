@@ -58,9 +58,9 @@ func run(ctx *cli.Context) error {
 	project := strings.TrimSuffix(uri[index:], path.Ext(uri[index:]))
 	file := ctx.String("file")
 	if file == "" {
-		file = fmt.Sprintf("%s/.cid/%s/%s.yml", project, project)
+		file = fmt.Sprintf(".cid/%s.yml", project)
 	} else {
-		file = fmt.Sprintf("%s/.cid/%s", project, file)
+		file = fmt.Sprintf(".cid/%s", file)
 	}
 	if err := Exec("cd", project); err != nil {
 		return err

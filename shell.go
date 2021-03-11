@@ -31,14 +31,21 @@ type LoadConfig interface {
 	Encode(*Config) error
 }
 
-func loadConfig(path string) (*Config, error) {
-	var lc LoadConfig
-	ext := filepath.Ext(path)
+func loadConfig(file string) (*Config, error) {
+	var (
+		lc  LoadConfig
+		err error
+	)
+	file = filepath.Clean(file)
+	if file, err = filepath.Abs(file); err != nil {
+		return nil, err
+	}
+	ext := filepath.Ext(file)
 	switch strings.ToLower(ext) {
 	case ".json":
-		lc = Json{path: path}
+		lc = Json{path: file}
 	case ".yml", ".yaml":
-		lc = Yml{path: path}
+		lc = Yml{path: file}
 	default:
 		return nil, fmt.Errorf("unsupport config extension %s", ext)
 	}
