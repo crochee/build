@@ -8,7 +8,7 @@ func TestInitConfig(t *testing.T) {
 			Type: "docker",
 			Name: "obs:latest",
 		},
-		Script: "build.sh",
+		Script: "./.build/obs/build.sh",
 	}
 	y := Yml{path: "obs.yml"}
 	if err := y.Encode(cf); err != nil {

@@ -11,19 +11,7 @@ func Shell(dir string) error {
 	if err != nil {
 		return err
 	}
-	if err = Exec("sh", cfg.Script); err != nil {
-		return err
-	}
-	if cfg.Product == nil {
-		return nil
-	}
-	if !strings.EqualFold(cfg.Product.Type, "docker") {
-		return nil
-	}
-	if cfg.Product.Name == "" {
-		return nil
-	}
-	return Exec("docker", "tag", cfg.Script)
+	return Exec("sh", cfg.Script)
 }
 
 type LoadConfig interface {
